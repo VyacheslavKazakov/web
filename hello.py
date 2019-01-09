@@ -3,8 +3,6 @@
 
 def hello(environ, start_response):
     args = environ['QUERY_STRING'].split('&')
+    body = [bytes(i + '\n', 'ascii') for i in args]
     start_response('200 OK', [('Content-Type', 'text/plain')])
-    return [print(i) for i in args]
-
-bind = '0.0.0.0:8080'
-pythonpath = "/home/box/web/"
+    return body
