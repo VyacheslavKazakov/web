@@ -5,6 +5,13 @@ sudo rm /etc/gunicorn.d/test
 sudo rm /etc/gunicorn.d/gunicorn-django.conf
 sudo rm /etc/nginx/sites-enabled/default
 
+mkdir /home/box/venv
+python3 -m ensurepip --upgrade
+python3 -m venv /home/box/venv
+source /home/box/venv/bin/activate
+
+pip3 install -r requirements.txt
+
 sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 sudo /etc/init.d/nginx restart
 sudo ln -s /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
