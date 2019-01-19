@@ -7,8 +7,10 @@ sudo rm /etc/nginx/sites-enabled/default
 
 sudo apt-get install python3-venv
 
-mkdir /home/box/venv
-python3 -m ensurepip --upgrade
+if [ -d /home/box/venv]; then
+  mkdir /home/box/venv
+fi
+
 python3 -m venv /home/box/venv
 source /home/box/venv/bin/activate
 
