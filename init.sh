@@ -5,16 +5,9 @@ sudo rm /etc/gunicorn.d/test
 sudo rm /etc/gunicorn.d/gunicorn-django.conf
 sudo rm /etc/nginx/sites-enabled/default
 
-if [ ! -d '/home/box/myenv' ]; then
-  mkdir /home/box/myenv
-else:
-  rm -rf /home/box/myenv/*
-fi
-
-virtualenv --python=python3.4 /home/box/myenv
-source /home/box/myenv/bin/activate
-
-pip3 install -r requirements.txt
+sudo pip3 uninstall gunicorn
+sudo pip3 uninstall django
+sudo pip3 install -r requirements.txt
 
 sudo ln -s /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 sudo /etc/init.d/nginx restart
