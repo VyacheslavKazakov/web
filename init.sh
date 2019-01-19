@@ -11,7 +11,7 @@ else:
   rm -rf /home/box/myenv/*
 fi
 
-virtualenv --python=python3.4 /home/box/myvenv
+virtualenv --python=python3.4 /home/box/myenv
 source /home/box/myenv/bin/activate
 
 pip3 install -r requirements.txt
