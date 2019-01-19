@@ -5,6 +5,8 @@ sudo rm /etc/gunicorn.d/test
 sudo rm /etc/gunicorn.d/gunicorn-django.conf
 sudo rm /etc/nginx/sites-enabled/default
 
+sudo apt-get install python3-venv
+
 mkdir /home/box/venv
 python3 -m ensurepip --upgrade
 python3 -m venv /home/box/venv
