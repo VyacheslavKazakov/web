@@ -7,12 +7,12 @@ sudo rm /etc/nginx/sites-enabled/default
 
 sudo apt-get install python3-venv
 
-if [ -d /home/box/venv]; then
-  mkdir /home/box/venv
+if [ -d /home/box/myenv]; then
+  mkdir /home/box/myenv
 fi
 
-python3 -m venv /home/box/venv
-source /home/box/venv/bin/activate
+python3 -m venv /home/box/myenv
+source /home/box/myenv/bin/activate
 
 pip3 install -r requirements.txt
 
