@@ -7,7 +7,7 @@ sudo rm /etc/nginx/sites-enabled/default
 
 sudo apt-get install python3-venv
 
-if [ -d /home/box/myenv]; then
+if [ -d '/home/box/myenv' ]; then
   mkdir /home/box/myenv
 fi
 
