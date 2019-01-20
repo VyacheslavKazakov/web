@@ -8,9 +8,20 @@ sudo rm /etc/gunicorn.d/test
 sudo rm /etc/gunicorn.d/gunicorn-django.conf
 sudo rm /etc/nginx/sites-enabled/default
 
-sudo pip3 uninstall gunicorn
-sudo pip3 uninstall django
-sudo pip3 install -r requirements.txt
+# sudo pip3 uninstall gunicorn
+# sudo pip3 uninstall django
+
+if [ ! -d '/home/box/web/myenv' ]; then
+  mkdir /home/box/myenv
+else:
+  rm -rf /home/box/web/myenv/*
+fi
+
+virtualenv --python=python3.4 /home/box/web/myenv
+source /home/box/web/myenv/bin/activate
+pip3 install -r requirements.txt
+
+# sudo pip3 install -r requirements.txt
 
 sudo vi /usr/sbin/gunicorn-debian
 sudo vi /usr/bin/gunicorn
