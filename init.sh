@@ -33,7 +33,7 @@ sudo /etc/init.d/nginx restart
 sudo ln -s /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
 sudo ln -s /home/box/web/etc/gunicorn-django.conf /etc/gunicorn.d/gunicorn-django.conf
 # sudo /etc/init.d/gunicorn restart test
-gunicorn -b 0.0.0.0:8080 --pythonpath /home/box/web/ hello:app &
+gunicorn -b 0.0.0.0:8080 --pythonpath /home/box/web/ hello:hello &
 # sudo /etc/init.d/gunicorn restart gunicorn-django.conf
 gunicorn -b 0.0.0.0:8000 --pythonpath /home/box/web/ask ask.wsgi:application &
 sudo /etc/init.d/mysql start
