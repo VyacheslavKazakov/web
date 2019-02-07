@@ -12,3 +12,8 @@ sudo ln -s /home/box/web/etc/gunicorn-django.conf /etc/gunicorn.d/gunicorn-djang
 sudo /etc/init.d/gunicorn restart test
 sudo /etc/init.d/gunicorn restart gunicorn-django.conf
 sudo /etc/init.d/mysql start
+
+###
+sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS stepik DEFAULT CHARACTER SET = utf8"
+sudo mysql -uroot -e "CREATE USER djanga@localhost auth_option: { IDENTIFIED BY 'dj_pass' }"
+sudo mysql -uroot -e "GRANT ALL ON stepik.* TO djanga@localhost"
