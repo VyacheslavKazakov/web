@@ -1,0 +1,45 @@
+    1  ды -дф 
+    2  ls -la 
+    3  more ./server_l11.py 
+    4  git clone https://github.con/VyacheslavKazakov/web
+    5  git clone https://github.com/VyacheslavKazakov/web
+    6  cd ./web
+    7  ls -l 
+    8  bash init.sh 
+    9  cd ./app
+   10  ls -la 
+   11  cd ./ask/
+   12  ls -la 
+   13  ./manage.py validate
+   14  ./manage.py validate
+   15  ./manage.py makemigrations qa
+   16  cd ..
+   17  git pull
+   18  cat ./init.sh 
+   19  cp ./init.sh ./restart.sh
+   20  vi ./restart.sh 
+   21  bash restart.sh 
+   22  ./ask/manage.py makemigrations
+   23  ./ask/manage.py migrate
+   24  git pull
+   25  bash restart.sh 
+   26  git pull
+   27  bash restart.sh 
+   28  ls -la 
+   29  ls -la ./ask
+   30  ls -la ./ask/qa/
+   31  car ./ask/qa/tests.py 
+   32  cat ./ask/qa/tests.py 
+   33  cat ../server_l11.py 
+   34  cp ../server_l11.py 
+   35  cp ../server_l11.py .
+   36  ls -la 
+   37  git add .
+   38  git commit
+   39  git config --global user.email "vyachka@gmail.com"
+   40  git config --global user.name "Vyacheslav Kazakov"
+   41  git add .
+   42  git commit
+   43  git push
+   44  history
+   45  history > ./history.txt
