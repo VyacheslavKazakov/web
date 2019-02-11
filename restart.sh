@@ -11,4 +11,4 @@ sudo ln -s /home/box/web/etc/gunicorn.conf /etc/gunicorn.d/test
 sudo ln -s /home/box/web/etc/gunicorn-django.conf /etc/gunicorn.d/gunicorn-django.conf
 sudo /etc/init.d/gunicorn restart test
 sudo /etc/init.d/gunicorn restart gunicorn-django.conf
-sudo /etc/init.d/mysql start
+sudo /etc/init.d/mysql restart

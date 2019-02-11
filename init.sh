@@ -13,7 +13,7 @@ sudo /etc/init.d/gunicorn restart test
 sudo /etc/init.d/gunicorn restart gunicorn-django.conf
 sudo /etc/init.d/mysql start
 
-###
+### MySQL init
 sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS stepik DEFAULT CHARACTER SET = utf8"
 sudo mysql -uroot -e "CREATE USER 'djanga' IDENTIFIED BY 'dj_pass'"
 sudo mysql -uroot -e "GRANT ALL ON stepik.* TO 'djanga'"
