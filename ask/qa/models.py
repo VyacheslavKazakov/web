@@ -11,6 +11,7 @@ class QuestionManager(models.Manager):
         return self.order_by('-rating')
 
 class Question(models.Model):
+    id = models.SlugField(unique=True)
     title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
@@ -23,13 +24,14 @@ class Question(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return '/post/%d/' % self.pk
+        return '/question/%d/' % self.id
 
     class Meta:
         db_table = 'questions'
         ordering = ['-added_at']
 
 class Answer(models.Model):
+    id = models.SlugField(unique=True)
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
     question = models.ForeignKey(Question,null=False, on_delete=models.CASCADE)
