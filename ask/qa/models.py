@@ -23,7 +23,7 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
-    def get_absolute_url(self):
+    def get_url(self):
         return '/question/%d/' % self.id
 
     class Meta:

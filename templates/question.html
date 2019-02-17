@@ -1,0 +1,10 @@
+<html>
+  <head></head>
+  <body>
+    <h1>{{ question.title|truncatechars:80 }}</h1>
+    <p>Author:{{ question.author }} Added:{{ question.added_at }} Rating:{{ question.rating }}></p>
+    <p>{{ question.likes }}></p>
+    <p>{{ question.text|truncatechars:280 }}></p>
+    <a href="{{ question.get_url }}">Read further</a>
+  </body>
+</html>
