@@ -25,25 +25,19 @@ def paginate(request, qs):
 @require_GET
 def home(request):
     questions = Question.objects.new()
-    limit = request.GET.get('limit', 10)
-    page = request.GET.get('page', 1)
-    paginator = Paginator(questions, limit)
-    paginator.baseurl = '/?page='
-    page = paginator.page(page) # Page
+    page = paginate(request, questions)
+    baseurl = '/?page='
     return render(request, 'base.html', {'questions': page.object_list,
-                                         'paginator': paginator,
+                                         'baseurl': baseurl,
                                          'page': page,})
 
 @require_GET
 def popular(request):
     questions = Question.objects.popular()
-    limit = request.GET.get('limit', 10)
-    page = request.GET.get('page', 1)
-    paginator = Paginator(questions, limit)
-    paginator.baseurl = '/popular/?page='
-    page = paginator.page(page) # Page
+    page = paginate(request, questions)
+    baseurl = '/popular/?page='
     return render(request, 'base.html', {'questions': page.object_list,
-                                         'paginator': paginator,
+                                         'baseurl': baseurl,
                                          'page': page,})
 
 @require_GET
