@@ -5,9 +5,9 @@
   <head>Question: {{ question.title|truncatechars:30 }}</head>
   <body>
     <h1>{{ question.title|truncatechars:80 }}</h1>
-    <p>Author:{{ question.author }} Added:{{ question.added_at }} Rating:{{ question.rating }}></p>
-    <p>{{ question.likes }}></p>
-    <p>{{ question.text }}></p>
+    <p>Author:{{ question.author }} Added:{{ question.added_at }} Rating:{{ question.rating }}</p>
+    <p>{{ question.likes }}</p>
+    <p>{{ question.text }}</p>
     {% for answer in answers %}
       {% include "question/answer.html" %}
     {% endfor %}
