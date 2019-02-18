@@ -14,3 +14,7 @@
    41  git add .
    42  git commit
    43  git push
+   35  git pull
+   36  bash restart.sh
+   38  curl -v "http://10.42.35.172"|more                                       
+   39  sudo cat /var/log/gunicorn/gunicorn-django.conf.log
