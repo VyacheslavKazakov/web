@@ -8,7 +8,7 @@ def paginate(request, qs):
         limit = int(request.GET.get('limit', 10))
     except ValueError:
         limit = 10
-    if limit > 100:
+    if not 0 < limit <=100:
         limit = 10
     try:
         page = int(request.GET.get('page', 1))
@@ -19,25 +19,25 @@ def paginate(request, qs):
         page = paginator.page(page)
     except EmptyPage:
         page = paginator.page(paginator.num_pages)
-    return page
+    return paginator, page
 
 
 @require_GET
 def home(request):
     questions = Question.objects.new()
-    page = paginate(request, questions)
-    baseurl = '/?page='
+    paginator, page = paginate(request, questions)
+    paginator.baseurl = '/?page='
     return render(request, 'base.html', {'questions': page.object_list,
-                                         'baseurl': baseurl,
+                                         'paginator': paginator,
                                          'page': page,})
 
 @require_GET
 def popular(request):
     questions = Question.objects.popular()
-    page = paginate(request, questions)
-    baseurl = '/popular/?page='
+    paginator, page = paginate(request, questions)
+    paginator.baseurl = '/popular/?page='
     return render(request, 'base.html', {'questions': page.object_list,
-                                         'baseurl': baseurl,
+                                         'paginator': paginator,
                                          'page': page,})
 
 @require_GET
