@@ -46,10 +46,9 @@ def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
 @require_GET
-def question_details(request, *args, **kwargs):
+def question_details(request, slug, *args, **kwargs):
     question = get_object_or_404(Question, id=slug)
     try:
-        # answers = question.answer.all()[:]
         answers = Answer.objects.filter(question=question)
     except Answer.DoesNotExist:
         answers = []
