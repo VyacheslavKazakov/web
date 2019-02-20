@@ -49,7 +49,8 @@ def test(request, *args, **kwargs):
 def question_details(request, *args, **kwargs):
     question = get_object_or_404(Question, id=slug)
     try:
-        answers = question.answer.all()[:]
+        # answers = question.answer.all()[:]
+        answers = Answer.objects.filter(question=slug)
     except Answer.DoesNotExist:
         answers = []
     return render(request, 'question/question_details.html',
