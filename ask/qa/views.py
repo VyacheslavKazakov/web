@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_GET
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
+from django.core.urlresolvers import reverse
 from qa.models import Question, Answer
 
 def paginate(request, qs):
@@ -27,7 +28,8 @@ def paginate(request, qs):
 def home(request):
     questions = Question.objects.new()
     paginator, page = paginate(request, questions)
-    paginator.baseurl = '/?page='
+    # paginator.baseurl = '/?page='
+    paginator.baseurl = reverse('ask:home', kwargs={'page': page})
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
                                          'page': page,})
@@ -36,7 +38,8 @@ def home(request):
 def popular(request):
     questions = Question.objects.popular()
     paginator, page = paginate(request, questions)
-    paginator.baseurl = '/popular/?page='
+    # paginator.baseurl = '/popular/?page='
+    paginator.baseurl = reverse('ask:popular', kwargs={'page': page})
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
                                          'page': page,})

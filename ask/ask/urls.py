@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from ask.views import found, not_found
+from qa.views import home, popular
 
 urlpatterns = [
-    url(r'^$', include('qa.urls')),
+    url(r'^admin/', admin.site.urls, name='admin'),
+    # url(r'^$', include('qa.urls')),
+    url(r'^$', home, name='home'),
     url(r'^question/', include('qa.urls')),
-    url(r'^login/', include('qa.urls')),
-    url(r'^signup/', include('qa.urls')),
-    url(r'^ask/', include('qa.urls')),
-    url(r'^popular/', include('qa.urls')),
-    url(r'^new/', include('qa.urls')),
+    url(r'^login/', found),
+    url(r'^signup/', found),
+    url(r'^ask/', found),
+    url(r'^popular/', popular, name='popular'),
+    url(r'^new/', found),
 ]

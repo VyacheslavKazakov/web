@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 
 class QuestionManager(models.Manager):
@@ -23,8 +24,10 @@ class Question(models.Model):
     def __unicode__(self):
         return self.title
 
+    # def get_url(self):
+    #     return "/question/{}/".format(self.id)
     def get_url(self):
-        return "/question/{}/".format(self.id)
+        return reverse('qa:question_details', kwargs={'slug': self.id})
 
     class Meta:
         db_table = 'questions'
