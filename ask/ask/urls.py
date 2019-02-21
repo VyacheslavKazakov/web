@@ -19,13 +19,13 @@ from ask.views import found, not_found
 from qa.views import home, popular
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls, name='admin'),
-    # url(r'^$', include('qa.urls')),
     url(r'^$', home, name='home'),
-    url(r'^question/', include('qa.urls')),
     url(r'^login/', found),
     url(r'^signup/', found),
     url(r'^ask/', found),
-    url(r'^popular/', popular, name='popular'),
     url(r'^new/', found),
+    url(r'^popular/', popular, name='popular'),
+    url(r'^question/', include('qa.urls')),
+    url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^', not_found),
 ]

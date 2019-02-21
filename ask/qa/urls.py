@@ -19,12 +19,5 @@ from django.contrib import admin
 from qa.views import question_details
 
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls, name='admin'),
-    # url(r'^$', home, name='home'),
-    # url(r'^login/', test, name='login'),
-    # url(r'^signup/', test, name='signup'),
     url(r'^(?P<slug>\d+)/$', question_details, name='question_details'),
-    # url(r'^ask/', test, name='ask'),
-    # url(r'^popular/', popular, name='popular'),
-    # url(r'^new/', test, name='new'),
 ]
