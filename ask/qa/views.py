@@ -30,7 +30,7 @@ def home(request):
     questions = Question.objects.new()
     paginator, page = paginate(request, questions)
     # paginator.baseurl = '/?page='
-    paginator.baseurl = reverse('home', kwargs={'page': ''})
+    paginator.baseurl = "{}/?page=".format(reverse('home'))
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
                                          'page': page,})
@@ -40,7 +40,7 @@ def popular(request):
     questions = Question.objects.popular()
     paginator, page = paginate(request, questions)
     # paginator.baseurl = '/popular/?page='
-    paginator.baseurl = reverse('popular', kwargs={'page': ''})
+    paginator.baseurl = "{}/?page=".format(reverse('popular'))
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
                                          'page': page,})
