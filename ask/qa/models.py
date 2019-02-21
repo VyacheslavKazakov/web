@@ -27,7 +27,7 @@ class Question(models.Model):
     # def get_url(self):
     #     return "/question/{}/".format(self.id)
     def get_url(self):
-        return reverse('qa:question_details', kwargs={'slug': self.id})
+        return reverse('question_details', kwargs={'slug': self.id})
 
     class Meta:
         db_table = 'questions'
