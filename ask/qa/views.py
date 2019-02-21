@@ -4,7 +4,6 @@ from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from qa.models import Question, Answer
-from ask.ask import urls
 
 
 def paginate(request, qs):
@@ -31,7 +30,7 @@ def home(request):
     questions = Question.objects.new()
     paginator, page = paginate(request, questions)
     # paginator.baseurl = '/?page='
-    paginator.baseurl = reverse('ask:home', kwargs={'page': page})
+    paginator.baseurl = reverse('home', kwargs={'page': page})
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
                                          'page': page,})
@@ -41,7 +40,7 @@ def popular(request):
     questions = Question.objects.popular()
     paginator, page = paginate(request, questions)
     # paginator.baseurl = '/popular/?page='
-    paginator.baseurl = reverse('ask:popular', kwargs={'page': page})
+    paginator.baseurl = reverse('popular', kwargs={'page': page})
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
                                          'page': page,})
