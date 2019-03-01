@@ -60,7 +60,7 @@ def question_details(request, slug, *args, **kwargs):
             url = answer.get_url()
             return HttpResponseRedirect(url)
     question = get_object_or_404(Question, id=slug)
-    form = AnswerForm()
+    form = AnswerForm(initial={'question': question.id})
     try:
         answers = question.answer_set.all()
     except Answer.DoesNotExist:
