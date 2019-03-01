@@ -14,7 +14,7 @@ class AnswerForm(ModelForm):
         return False
 
     def clean(self):
-        if is_spam(self.cleaned_data):
+        if self.is_spam(self.cleaned_data):
             raise forms.ValidationError(u'Сообщение похоже на спам', code='spam')
 
 
@@ -27,7 +27,7 @@ class AskForm(forms.Form):
 
     def clean_text(self):
         text = self.cleaned_data['text']
-        if not is_ethic(text):
+        if not self.is_ethic(text):
             raise forms.ValidationError(u'Сообщение некорректно', code=12)
         return text + "\nYour question received."
 
