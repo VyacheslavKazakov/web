@@ -10,7 +10,7 @@ class AnswerForm(ModelForm):
         model = Answer
         fields = ['text', 'question']
 
-    def is_spam(text):
+    def is_spam(self, text):
         return False
 
     def clean(self):
@@ -22,7 +22,7 @@ class AskForm(forms.Form):
     title = forms.CharField(max_length=100)
     text = forms.CharField(widget=forms.Textarea)
 
-    def is_ethic(text):
+    def is_ethic(self, text):
         return True
 
     def clean_text(self):
