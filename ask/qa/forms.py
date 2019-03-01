@@ -3,7 +3,7 @@
 
 from django import forms
 from django.forms import ModelForm
-
+from qa.models import Answer
 
 class AnswerForm(ModelForm):
     class Meta:
