@@ -59,17 +59,16 @@ def question_details(request, slug, *args, **kwargs):
             answer = form.save()
             url = answer.get_url()
             return HttpResponseRedirect(url)
-    else:
-        question = get_object_or_404(Question, id=slug)
-        form = AnswerForm()
-        try:
-            answers = question.answer_set.all()
-        except Answer.DoesNotExist:
-            answers = []
-        return render(request, 'question/question_details.html',
-                                      {'question': question,
-                                       'answers': answers,
-                                       'form': form})
+    question = get_object_or_404(Question, id=slug)
+    form = AnswerForm()
+    try:
+        answers = question.answer_set.all()
+    except Answer.DoesNotExist:
+        answers = []
+    return render(request, 'question/question_details.html',
+                                  {'question': question,
+                                   'answers': answers,
+                                   'form': form})
 
 
 def ask_question(request, *args, **kwargs):
