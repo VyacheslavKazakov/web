@@ -4,6 +4,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from qa.models import Question, Answer
+from qa.forms import AnswerForm, AskForm
 
 
 def paginate(request, qs):
