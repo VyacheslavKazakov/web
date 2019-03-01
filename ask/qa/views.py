@@ -29,7 +29,6 @@ def paginate(request, qs):
 def home(request):
     questions = Question.objects.new()
     paginator, page = paginate(request, questions)
-    # paginator.baseurl = '/?page='
     paginator.baseurl = "{}?page=".format(reverse('home'))
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
@@ -39,7 +38,6 @@ def home(request):
 def popular(request):
     questions = Question.objects.popular()
     paginator, page = paginate(request, questions)
-    # paginator.baseurl = '/popular/?page='
     paginator.baseurl = "{}?page=".format(reverse('popular'))
     return render(request, 'base.html', {'questions': page.object_list,
                                          'paginator': paginator,
@@ -49,14 +47,34 @@ def popular(request):
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
-@require_GET
+
 def question_details(request, slug, *args, **kwargs):
-    question = get_object_or_404(Question, id=slug)
-    try:
-        # answers = Answer.objects.filter(question=question)
-        answers = question.answer_set.all()
-    except Answer.DoesNotExist:
-        answers = []
-    return render(request, 'question/question_details.html',
-                  {'question': question,
-                   'answers': answers,})
+    if request.method == "POST":
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save()
+            url = answer.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        question = get_object_or_404(Question, id=slug)
+        form = AnswerForm()
+        try:
+            answers = question.answer_set.all()
+        except Answer.DoesNotExist:
+            answers = []
+        return render(request, 'question/question_details.html',
+                                      {'question': question,
+                                       'answers': answers,
+                                       'form': form})
+
+
+def ask_question(request, *args, **kwargs):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+        else:
+            form = AskForm()
+            return render(request, 'ask.html', {'form': form})
