@@ -5,8 +5,7 @@ from django.db import models
 # from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import hashlib
-import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 import string
 import random
 
