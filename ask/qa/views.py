@@ -131,4 +131,7 @@ def login(request):
             return response
         else:
             error = u'Неверный логин / пароль'
+    else:
+        form = LoginForm()
+        return render(request, 'login.html', {'form': form})
     return render(request, 'login.html', {'error': error })
