@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
+from django.utils.deprecation import MiddlewareMixin
 import datetime
 
-class CheckSessionMiddleware:
+class CheckSessionMiddleware(MiddlewareMixin):
     def __init__(self, get_response):
         self.get_response = get_response
 
