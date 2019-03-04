@@ -18,9 +18,9 @@ class QuestionManager(models.Manager):
         return self.order_by('-rating')
 
 class User(models.Model):
-    username = models.CharField(unique=True)
-    password = models.CharField()
-    email = models.CharField()
+    username = models.CharField(unique=True, max_length=255)
+    password = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.username
@@ -60,7 +60,7 @@ class Answer(models.Model):
         db_table = 'answers'
 
 class Session(models.Model):
-    key = models.CharField(unique=True)
+    key = models.CharField(unique=True, max_length=255)
     user = models.ForeignKey(User)
     expires = models.DateTimeField()
 
