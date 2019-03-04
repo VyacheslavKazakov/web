@@ -1,11 +1,14 @@
 <html>
-  <head>"Ask a question"</head>
+  <head>"Signing up"</head>
   <body>
-    <h1>"Ask your question here:"</h1>
+    <h1>"Please signup for asking questions"</h1>
     {% for e in form.non_field_errors %}
       <div class="alert alert-danger">{{ e }}</div>
     {% endfor %}
-    <form class="form-horizontal" method="post" action="/ask/">
+    {% if error != '' %}
+      <p>error</p>
+    {% endif %}
+    <form class="form-horizontal" method="post" action="/signup/">
       {% csrf_token %}
       <fieldset>
         {% for field in form %}

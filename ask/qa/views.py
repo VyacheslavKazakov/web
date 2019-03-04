@@ -6,9 +6,10 @@ from django.views.decorators.http import require_GET
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
-from qa.models import Question, Answer
-from qa.forms import AnswerForm, AskForm
-
+from qa.models import Question, Answer, do_login, salt_and_hash
+from qa.forms import AnswerForm, AskForm, SignUpForm
+import datetime
+from datetime import timedelta
 
 def paginate(request, qs):
     try:
@@ -55,6 +56,10 @@ def test(request, *args, **kwargs):
 def question_details(request, slug, *args, **kwargs):
     if request.method == "POST":
         form = AnswerForm(request.POST)
+        form._user = request.user
+        if not form._user:
+            error = u'Неверный логин / пароль'
+            return render(request, 'login.html', {'error': error })
         if form.is_valid():
             answer = form.save()
             url = answer.get_url()
@@ -73,7 +78,12 @@ def question_details(request, slug, *args, **kwargs):
 
 def ask_question(request, *args, **kwargs):
     if request.method == "POST":
+        url = request.POST.get('continue', '/')
         form = AskForm(request.POST)
+        form._user = request.user
+        if not form._user:
+            error = u'Неверный логин / пароль'
+            return render(request, 'login.html', {'error': error })
         if form.is_valid():
             question = form.save()
             url = question.get_url()
@@ -81,3 +91,46 @@ def ask_question(request, *args, **kwargs):
     else:
         form = AskForm()
         return render(request, 'ask.html', {'form': form})
+
+
+def signup(request):
+    error = ''
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = salt_and_hash(request.POST.get('password'))
+        url = '/'
+        request.POST['password'] = password
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            sessionid = do_login(username, password)
+            if sessionid:
+                response = HttpResponseRedirect(url)
+                response.set_cookie('sessionid', sessionid,
+                                    domain='.', httponly=True,
+                                    expires = datetime.now()+timedelta(days=5))
+                return response
+            else:
+                error = u'Неверный логин / пароль'
+    else:
+        form = SignUpForm()
+        return render(request, 'signup.html', {'form': form})
+    return render(request, 'login.html', {'error': error })
+
+
+def login(request):
+    error = ''
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        url = request.POST.get('continue', '/')
+        sessionid = do_login(username, password)
+        if sessionid:
+            response = HttpResponseRedirect(url)
+            response.set_cookie('sessionid', sessionid,
+                                domain='.', httponly=True,
+                                expires = datetime.now()+timedelta(days=5))
+            return response
+        else:
+            error = u'Неверный логин / пароль'
+    return render(request, 'login.html', {'error': error })

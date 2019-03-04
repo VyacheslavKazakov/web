@@ -3,7 +3,7 @@
 
 from django import forms
 from django.forms import ModelForm
-from qa.models import Answer, Question
+from qa.models import Answer, Question, User
 
 class AnswerForm(ModelForm):
     class Meta:
@@ -29,9 +29,42 @@ class AskForm(forms.Form):
         text = self.cleaned_data['text']
         if not self.is_ethic(text):
             raise forms.ValidationError(u'Сообщение некорректно', code=12)
-        return text + "\nYour question received."
+        return text
 
     def save(self):
         post = Question(**self.cleaned_data)
         post.save()
         return post
+
+
+class SignUpForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    email = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=100)
+
+    def clean(self):
+        for field in self.cleaned_data.keys():
+            if not self.cleaned_data[field]:
+                raise forms.ValidationError(u'Недостаточно данных, заполните все поля', code=15)
+        return cleaned_data
+
+    def save(self):
+        user = User(**self.cleaned_data)
+        user.save()
+        return user
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(max_length=100)
+
+    def clean(self):
+        for field in self.cleaned_data.keys():
+            if not self.cleaned_data[field]:
+                raise forms.ValidationError(u'Недостаточно данных, заполните все поля', code=15)
+        return cleaned_data
+
+    def save(self):
+        user = User(**self.cleaned_data)
+        user.save()
+        return user
