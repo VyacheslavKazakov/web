@@ -82,7 +82,8 @@ def do_login(username, password):
 def salt_and_hash(password):
     m = hashlib.md5()
     salt = 'salt'
-    return m.update(salt + password).hexdigest()
+    m.update(salt + password)
+    return m.hexdigest()
 
 def generate_long_random_key():
     size=16
