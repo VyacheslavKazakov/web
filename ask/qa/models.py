@@ -17,6 +17,17 @@ class QuestionManager(models.Manager):
     def popular(self):
         return self.order_by('-rating')
 
+class User(models.Model):
+    username = models.CharField(unique=True)
+    password = models.CharField()
+    email = models.CharField()
+
+    def __unicode__(self):
+        return self.username
+
+    class Meta:
+        db_table = 'users'
+
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
@@ -47,17 +58,6 @@ class Answer(models.Model):
 
     class Meta:
         db_table = 'answers'
-
-class User(models.Model):
-    username = models.CharField(unique=True)
-    password = models.CharField()
-    email = models.CharField()
-
-    def __unicode__(self):
-        return self.username
-
-    class Meta:
-        db_table = 'users'
 
 class Session(models.Model):
     key = models.CharField(unique=True)
