@@ -42,12 +42,6 @@ class SignUpForm(forms.Form):
     email = forms.CharField(max_length=100)
     password = forms.CharField(max_length=100)
 
-    def clean(self):
-        for field in self.cleaned_data.keys():
-            if not self.cleaned_data[field]:
-                raise forms.ValidationError(u'Недостаточно данных, заполните все поля', code=15)
-        return cleaned_data
-
     def clean_password(self):
         password = self.cleaned_data['password']
         hashed_password = salt_and_hash(password=password)
@@ -62,12 +56,6 @@ class SignUpForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=100)
     password = forms.CharField(max_length=100)
-
-    def clean(self):
-        for field in self.cleaned_data.keys():
-            if not self.cleaned_data[field]:
-                raise forms.ValidationError(u'Недостаточно данных, заполните все поля', code=15)
-        return cleaned_data
 
     def save(self):
         user = User(**self.cleaned_data)
