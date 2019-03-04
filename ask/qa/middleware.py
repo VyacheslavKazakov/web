@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 
-class CheckSessionMiddleware(class):
+class CheckSessionMiddleware:
     def process_request(self, request):
         try:
             sessionid = request.COOKIE.get('sessionid')
