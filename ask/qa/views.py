@@ -97,9 +97,8 @@ def signup(request):
     error = ''
     if request.method == "POST":
         username = request.POST.get('username')
-        password = salt_and_hash(request.POST.get('password'))
+        password = request.POST.get('password')
         url = '/'
-        request.POST['password'] = password
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()

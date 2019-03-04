@@ -3,7 +3,7 @@
 
 from django import forms
 from django.forms import ModelForm
-from qa.models import Answer, Question, User
+from qa.models import Answer, Question, User, salt_and_hash
 
 class AnswerForm(ModelForm):
     class Meta:
@@ -47,6 +47,11 @@ class SignUpForm(forms.Form):
             if not self.cleaned_data[field]:
                 raise forms.ValidationError(u'Недостаточно данных, заполните все поля', code=15)
         return cleaned_data
+
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        hashed_password = salt_and_hash(password=password)
+        return hashed_password
 
     def save(self):
         user = User(**self.cleaned_data)
