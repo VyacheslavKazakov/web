@@ -3,11 +3,7 @@
 import datetime
 
 class CheckSessionMiddleware:
-
-    def __init__(self):
-        pass
-
-    def process_request(request):
+    def process_request(self, request):
         try:
             sessionid = request.COOKIE.get('sessionid')
             session = Session.objects.get(key=sessionid,
