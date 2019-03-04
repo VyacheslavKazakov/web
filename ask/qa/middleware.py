@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.utils.deprecation import MiddlewareMixin
-from detetime import datetime
+from datetime import datetime
 
 class CheckSessionMiddleware(MiddlewareMixin):
     def __init__(self, get_response):
