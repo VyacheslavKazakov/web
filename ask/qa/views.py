@@ -7,7 +7,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from qa.models import Question, Answer, do_login, salt_and_hash
-from qa.forms import AnswerForm, AskForm, SignUpForm
+from qa.forms import AnswerForm, AskForm, SignUpForm, LoginForm
 from datetime import datetime, timedelta
 
 def paginate(request, qs):
