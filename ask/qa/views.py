@@ -81,7 +81,7 @@ def ask_question(request, *args, **kwargs):
     if request.method == "POST":
         url = request.POST.get('continue', '/')
         form = AskForm(request.POST)
-        # form._user = request.user
+        form._user = request.user
         if not form._user:
             error = u'Неверный логин / пароль'
             return render(request, 'login.html', {'error': error })
