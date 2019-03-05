@@ -6,7 +6,7 @@ from django.views.decorators.http import require_GET
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
-from qa.models import Question, Answer, do_login, salt_and_hash
+from qa.models import Question, Answer, do_login, salt_and_hash, User
 from qa.forms import AnswerForm, AskForm, SignUpForm, LoginForm
 from datetime import datetime, timedelta
 
@@ -81,12 +81,16 @@ def ask_question(request, *args, **kwargs):
     if request.method == "POST":
         url = request.POST.get('continue', '/')
         form = AskForm(request.POST)
-        form._user = request.user
+        # form._user = request.user
         if not form._user:
             error = u'Неверный логин / пароль'
             return render(request, 'login.html', {'error': error })
         if form.is_valid():
-            question = form.save()
+            question = form.save(commit=False)
+            user = User.objects.get(username=request.user)
+            question.author = user.id
+            question.save()
+            # question = form.save()
             url = question.get_url()
             return HttpResponseRedirect(url)
     else:
