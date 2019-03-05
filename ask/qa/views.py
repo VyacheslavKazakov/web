@@ -55,7 +55,9 @@ def test(request, *args, **kwargs):
 def question_details(request, slug, *args, **kwargs):
     if request.method == "POST":
         form = AnswerForm(request.POST)
-        form._user = request.user
+        # form._user = request.user
+        user = User.objects.get(username=request.user)
+        form.author_id = user.id
         if not form._user:
             error = u'Неверный логин / пароль'
             return render(request, 'login.html', {'error': error })

@@ -32,9 +32,10 @@ class AskForm(forms.Form):
         return text
 
     def save(self):
-        post = Question(**self.cleaned_data)
-        post.save()
-        return post
+        qurstion = Question(**self.cleaned_data)
+        question.author_id = self._user.id
+        question.save()
+        return question
 
 
 class SignUpForm(forms.Form):
