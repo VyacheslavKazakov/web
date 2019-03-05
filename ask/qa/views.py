@@ -86,11 +86,11 @@ def ask_question(request, *args, **kwargs):
             error = u'Неверный логин / пароль'
             return render(request, 'login.html', {'error': error })
         if form.is_valid():
-            question = form.save(commit=False)
-            user = User.objects.get(username=request.user)
-            question.author = user.id
-            question.save()
-            # question = form.save()
+            # question = form.save(commit=False)
+            # user = User.objects.get(username=request.user)
+            # question.author = user.id
+            # question.save()
+            question = form.save()
             url = question.get_url()
             return HttpResponseRedirect(url)
     else:
