@@ -81,14 +81,15 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+#
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'stepik',
-        'USER': 'djanga',
-        'PASSWORD': 'dj_pass',
-        'HOST': '127.0.0.1',
+        'USER': 'vyachka',
+        'PASSWORD': 'QW9jFhmbJKQErjK',
+        'HOST': 'vyachka.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
